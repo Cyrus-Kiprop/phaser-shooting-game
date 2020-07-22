@@ -66,6 +66,16 @@ export default class PreloaderScene extends Phaser.Scene {
         })
 
 
+        // remove progress bar when complete
+        this.load.on('complete', function() {
+            progressBar.destroy();
+            progressBox.destroy();
+            loadingText.destroy();
+            percentText.destroy();
+            assetText.destroy();
+        });
+
+
     }
 
     create() {}
