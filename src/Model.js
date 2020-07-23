@@ -1,8 +1,8 @@
 export default class Model {
   constructor() {
-    this._soundOn = true;
-    this._musicOn = true;
-    this._bgMusicPlaying = false;
+    this.soundOn = true;
+    this.musicOn = true;
+    this.bgMusicPlaying = false;
   }
 
   set musicOn(value) {
