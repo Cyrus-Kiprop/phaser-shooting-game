@@ -1,6 +1,6 @@
 import "phaser";
 import Button from "../Objects/Button";
-import { Player, GunShip } from "../Entities/Entities";
+import { Player, GunShip, CarrierShip, ChaserShip } from "../Entities/Entities";
 
 export default class SceneMain extends Phaser.Scene {
   constructor() {
@@ -138,12 +138,34 @@ export default class SceneMain extends Phaser.Scene {
     this.time.addEvent({
       delay: 1000,
       callback: function () {
-        var enemy = new GunShip(
-          this,
-          Phaser.Math.Between(0, this.game.config.width),
-          0
-        );
-        this.enemies.add(enemy);
+        var enemy = null;
+
+        if (Phaser.Math.Between(0, 10) >= 3) {
+          enemy = new GunShip(
+            this,
+            Phaser.Math.Between(0, this.game.config.width),
+            0
+          );
+        } else if (Phaser.Math.Between(0, 10) >= 5) {
+          if (this.getEnemiesByType("ChaserShip").length < 5) {
+            enemy = new ChaserShip(
+              this,
+              Phaser.Math.Between(0, this.game.config.width),
+              0
+            );
+          }
+        } else {
+          enemy = new CarrierShip(
+            this,
+            Phaser.Math.Between(0, this.game.config.width),
+            0
+          );
+        }
+
+        if (enemy !== null) {
+          enemy.setScale(Phaser.Math.Between(10, 20) * 0.1);
+          this.enemies.add(enemy);
+        }
       },
       callbackScope: this,
       loop: true,
@@ -166,5 +188,21 @@ export default class SceneMain extends Phaser.Scene {
     } else if (this.keyA.isDown) {
       this.player.moveLeft();
     }
+    for (var i = 0; i < this.enemies.getChildren().length; i++) {
+      var enemy = this.enemies.getChildren()[i];
+
+      enemy.update();
+    }
+  }
+
+  getEnemiesByType(type) {
+    var arr = [];
+    for (var i = 0; i < this.enemies.getChildren().length; i++) {
+      var enemy = this.enemies.getChildren()[i];
+      if (enemy.getData("type") == type) {
+        arr.push(enemy);
+      }
+    }
+    return arr;
   }
 }
