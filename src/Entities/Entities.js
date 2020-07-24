@@ -8,3 +8,28 @@ class Entity extends Phaser.GameObjects.Sprite {
     this.setData("isDead", false);
   }
 }
+
+class Player extends Entity {
+  constructor(scene, x, y, key, type) {
+    super(scene, x, y, "Player");
+    this.setData("speed", 200);
+    // some animations for the player
+    this.play("sprPlayer");
+  }
+
+  moveUp() {
+    this.body.velocity.y = -this.getData("speed");
+  }
+
+  moveDown() {
+    this.body.velocity.y = this.getData("speed");
+  }
+
+  moveLeft() {
+    this.body.velocity.x = -this.getData("speed");
+  }
+
+  moveRight() {
+    this.body.velocity.x = this.getData("speed");
+  }
+}
