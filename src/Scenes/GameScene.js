@@ -1,6 +1,6 @@
 import "phaser";
 import Button from "../Objects/Button";
-import { Player } from "../Entities/Entities";
+import { Player, GunShip } from "../Entities/Entities";
 
 export default class SceneMain extends Phaser.Scene {
   constructor() {
@@ -44,33 +44,67 @@ export default class SceneMain extends Phaser.Scene {
       });
     };
 
-    this.anims.create({
-      key: "sprEnemy0",
-      frames: this.anims.generateFrameNumbers("sprEnemy0"),
-      frameRate: 20,
-      repeat: -1,
+    [
+      {
+        key: "sprEnemy0",
+        frameValue: "sprEnemy0",
+        frameRate: 20,
+        repeat: -1,
+      },
+      {
+        key: "sprEnemy2",
+        frameValue: "sprEnemy2",
+        frameRate: 20,
+        repeat: -1,
+      },
+      {
+        key: "sprExplosion",
+        frameValue: "sprExplosion",
+        frameRate: 20,
+        repeat: -1,
+      },
+      {
+        key: "sprPlayer",
+        frameValue: "sprPlayer",
+        frameRate: 20,
+        repeat: -1,
+      },
+    ].forEach((animation) => {
+      animationCreator(
+        animation.key,
+        animation.frameValue,
+        animation.frameRate,
+        animation.repeat
+      );
     });
 
-    this.anims.create({
-      key: "sprEnemy2",
-      frames: this.anims.generateFrameNumbers("sprEnemy2"),
-      frameRate: 20,
-      repeat: -1,
-    });
+    // this.anims.create({
+    // key: "sprEnemy0",
+    // frames: this.anims.generateFrameNumbers("sprEnemy0"),
+    // frameRate: 20,
+    // repeat: -1,
+    // });
 
-    this.anims.create({
-      key: "sprExplosion",
-      frames: this.anims.generateFrameNumbers("sprExplosion"),
-      frameRate: 20,
-      repeat: 0,
-    });
+    // this.anims.create({
+    // key: "sprEnemy2",
+    // frames: this.anims.generateFrameNumbers("sprEnemy2"),
+    // frameRate: 20,
+    // repeat: -1,
+    // });
 
-    this.anims.create({
-      key: "sprPlayer",
-      frames: this.anims.generateFrameNumbers("sprPlayer"),
-      frameRate: 20,
-      repeat: -1,
-    });
+    // this.anims.create({
+    // key: "sprExplosion",
+    // frames: this.anims.generateFrameNumbers("sprExplosion"),
+    // frameRate: 20,
+    // repeat: 0,
+    // });
+
+    // this.anims.create({
+    // key: "sprPlayer",
+    // frames: this.anims.generateFrameNumbers("sprPlayer"),
+    // frameRate: 20,
+    // repeat: -1,
+    // });
 
     // this needs to be in the global scope
     this.sfx = {
@@ -97,6 +131,23 @@ export default class SceneMain extends Phaser.Scene {
     this.keySpace = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.SPACE
     );
+    this.enemies = this.add.group();
+    this.enemyLasers = this.add.group();
+    this.playerLasers = this.add.group();
+
+    this.time.addEvent({
+      delay: 100,
+      callback: function () {
+        var enemy = new GunShip(
+          this,
+          Phaser.Math.Between(0, this.game.config.width),
+          0
+        );
+        this.enemies.add(enemy);
+      },
+      callbackScope: this,
+      loop: true,
+    });
 
     // player Motions
   }
