@@ -1,5 +1,6 @@
 import "phaser";
 import Button from "../Objects/Button";
+import { Player } from "../Entities/Entities";
 
 export default class SceneMain extends Phaser.Scene {
   constructor() {
@@ -34,6 +35,15 @@ export default class SceneMain extends Phaser.Scene {
     this.load.audio("sndLaser", "assets/sndLaser.wav");
   }
   create() {
+    const animationCreator = (key, frameValue, frameRate, repeat) => {
+      this.anims.create({
+        key,
+        frames: this.anims.generateFrameNumbers(frameValue),
+        frameRate,
+        repeat,
+      });
+    };
+
     this.anims.create({
       key: "sprEnemy0",
       frames: this.anims.generateFrameNumbers("sprEnemy0"),
@@ -70,5 +80,40 @@ export default class SceneMain extends Phaser.Scene {
       ],
       laser: this.sound.add("sndLaser"),
     };
+
+    // instantiate a new player
+    this.player = new Player(
+      this,
+      this.game.config.width * 0.5,
+      this.game.config.height * 0.5,
+      "sprPlayer"
+    );
+
+    // key Inputs
+    this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+    this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+    this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+    this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    this.keySpace = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.SPACE
+    );
+
+    // player Motions
+  }
+
+  update() {
+    this.player.update();
+
+    if (this.keyD.isDown) {
+      this.player.moveRight();
+    }
+
+    if (this.keyW.isDown) {
+      this.player.moveUp();
+    } else if (this.keyS.isDown) {
+      this.player.moveDown();
+    } else if (this.keyA.isDown) {
+      this.player.moveLeft();
+    }
   }
 }
