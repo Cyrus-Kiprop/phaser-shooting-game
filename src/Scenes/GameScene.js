@@ -28,6 +28,10 @@ export default class SceneMain extends Phaser.Scene {
       frameWidth: 16,
       frameHeight: 16,
     });
+
+    this.load.audio("sndExplode0", "assets/sndExplode0.wav");
+    this.load.audio("sndExplode1", "assets/sndExplode1.wav");
+    this.load.audio("sndLaser", "assets/sndLaser.wav");
   }
   create() {
     this.anims.create({
@@ -57,5 +61,14 @@ export default class SceneMain extends Phaser.Scene {
       frameRate: 20,
       repeat: -1,
     });
+
+    // this needs to be in the global scope
+    this.sfx = {
+      explosions: [
+        this.sound.add("sndExplode0"),
+        this.sound.add("sndExplode1"),
+      ],
+      laser: this.sound.add("sndLaser"),
+    };
   }
 }
