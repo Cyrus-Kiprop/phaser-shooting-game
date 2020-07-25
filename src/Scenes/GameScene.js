@@ -138,7 +138,7 @@ export default class SceneMain extends Phaser.Scene {
     this.time.addEvent({
       delay: 1000,
       callback: function () {
-        var enemy = null;
+        let enemy = null;
 
         if (Phaser.Math.Between(0, 10) >= 3) {
           enemy = new GunShip(
@@ -188,17 +188,28 @@ export default class SceneMain extends Phaser.Scene {
     } else if (this.keyA.isDown) {
       this.player.moveLeft();
     }
-    for (var i = 0; i < this.enemies.getChildren().length; i++) {
-      var enemy = this.enemies.getChildren()[i];
+
+    if (this.keySpace.isDown) {
+      this.player.setData("isShooting", true);
+    } else {
+      this.player.setData(
+        "timerShootTick",
+        this.player.getData("timerShootDelay") - 1
+      );
+      this.player.setData("isShooting", false);
+    }
+
+    for (let i = 0; i < this.enemies.getChildren().length; i++) {
+      let enemy = this.enemies.getChildren()[i];
 
       enemy.update();
     }
   }
 
   getEnemiesByType(type) {
-    var arr = [];
-    for (var i = 0; i < this.enemies.getChildren().length; i++) {
-      var enemy = this.enemies.getChildren()[i];
+    let arr = [];
+    for (let i = 0; i < this.enemies.getChildren().length; i++) {
+      let enemy = this.enemies.getChildren()[i];
       if (enemy.getData("type") == type) {
         arr.push(enemy);
       }
