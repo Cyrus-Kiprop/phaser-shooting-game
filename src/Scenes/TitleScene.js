@@ -42,6 +42,19 @@ export default class TitleScene extends Phaser.Scene {
       "Credits"
     );
 
+    this.title = this.add.text(
+      this.game.config.width * 0.2,
+      70,
+      "EXECUTE BADDIES!!",
+      {
+        fontFamily: "monospace",
+        fontSize: 48,
+        fontStyle: "italic",
+        color: "red",
+        // align: "left",
+      }
+    );
+
     this.model = this.sys.game.globals.model;
     if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
       this.bgMusic = this.sound.add("bgMusic", { volume: 0.5, loop: true });
