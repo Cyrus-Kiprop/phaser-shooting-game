@@ -72,6 +72,17 @@ export class Player extends Entity {
     this.body.velocity.x = this.getData("speed");
   }
 
+  onDestroy() {
+    this.scene.time.addEvent({
+      delay: 1000,
+      callback() {
+        this.scene.scene.start("GameOverScene");
+      },
+      callbackScope: this,
+      loop: false,
+    });
+  }
+
   update() {
     this.body.setVelocity(0, 0);
     this.x = Phaser.Math.Clamp(this.x, 0, this.scene.game.config.width);
