@@ -78,34 +78,6 @@ export default class SceneMain extends Phaser.Scene {
       );
     });
 
-    // this.anims.create({
-    // key: "sprEnemy0",
-    // frames: this.anims.generateFrameNumbers("sprEnemy0"),
-    // frameRate: 20,
-    // repeat: -1,
-    // });
-
-    // this.anims.create({
-    // key: "sprEnemy2",
-    // frames: this.anims.generateFrameNumbers("sprEnemy2"),
-    // frameRate: 20,
-    // repeat: -1,
-    // });
-
-    // this.anims.create({
-    // key: "sprExplosion",
-    // frames: this.anims.generateFrameNumbers("sprExplosion"),
-    // frameRate: 20,
-    // repeat: 0,
-    // });
-
-    // this.anims.create({
-    // key: "sprPlayer",
-    // frames: this.anims.generateFrameNumbers("sprPlayer"),
-    // frameRate: 20,
-    // repeat: -1,
-    // });
-
     // this needs to be in the global scope
     this.sfx = {
       explosions: [
@@ -122,6 +94,8 @@ export default class SceneMain extends Phaser.Scene {
       this.game.config.height * 0.5,
       "sprPlayer"
     );
+
+    // enemy dies on contact with player bullet
 
     // key Inputs
     this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -177,46 +151,85 @@ export default class SceneMain extends Phaser.Scene {
   update() {
     this.player.update();
 
-    if (this.keyD.isDown) {
-      this.player.moveRight();
+    if (!this.player.getData("isDead")) {
+      this.player.update();
+      if (this.keyW.isDown) {
+        this.player.moveUp();
+      } else if (this.keyS.isDown) {
+        this.player.moveDown();
+      }
+      if (this.keyA.isDown) {
+        this.player.moveLeft();
+      } else if (this.keyD.isDown) {
+        this.player.moveRight();
+      }
+
+      if (this.keySpace.isDown) {
+        this.player.setData("isShooting", true);
+      } else {
+        this.player.setData(
+          "timerShootTick",
+          this.player.getData("timerShootDelay") - 1
+        );
+        this.player.setData("isShooting", false);
+      }
     }
+    // define the kill rules
+    // player dies on contact with enemy ship
+    this.physics.add.overlap(this.player, this.enemies, function (
+      player,
+      enemy
+    ) {
+      if (!player.getData("isDead") && !enemy.getData("isDead")) {
+        player.explode(false);
+        enemy.explode(true);
+      }
+    });
 
-    if (this.keyW.isDown) {
-      this.player.moveUp();
-    } else if (this.keyS.isDown) {
-      this.player.moveDown();
-    } else if (this.keyA.isDown) {
-      this.player.moveLeft();
-    }
+    this.physics.add.overlap(this.player, this.enemyLasers, function (
+      player,
+      laser
+    ) {
+      if (!player.getData("isDead") && !laser.getData("isDead")) {
+        player.explode(false);
+        laser.destroy();
+      }
+    });
 
-    if (this.keySpace.isDown) {
-      this.player.setData("isShooting", true);
-    } else {
-      this.player.setData(
-        "timerShootTick",
-        this.player.getData("timerShootDelay") - 1
-      );
-      this.player.setData("isShooting", false);
-    }
-
-    for (let i = 0; i < this.enemies.getChildren().length; i++) {
-      let enemy = this.enemies.getChildren()[i];
-
-      enemy.update();
-    }
-
-    if (
-      enemy.x < -enemy.displayWidth ||
-      enemy.x > this.game.config.width + enemy.displayWidth ||
-      enemy.y < -enemy.displayHeight * 4 ||
-      enemy.y > this.game.config.height + enemy.displayHeight
+    this.physics.add.collider(this.playerLasers, this.enemies, function (
+      playerLaser,
+      enemy
     ) {
       if (enemy) {
         if (enemy.onDestroy !== undefined) {
           enemy.onDestroy();
         }
 
-        enemy.destroy();
+        enemy.explode(true);
+        playerLaser.destroy();
+      }
+    });
+
+    // End of kill rules
+
+    for (let i = 0; i < this.enemies.getChildren().length; i++) {
+      let enemy = this.enemies.getChildren()[i];
+
+      enemy.update();
+
+      if (
+        enemy.x < -enemy.displayWidth ||
+        enemy.x > this.game.config.width + enemy.displayWidth ||
+        enemy.y < -enemy.displayHeight * 4 ||
+        enemy.y > this.game.config.height + enemy.displayHeight
+      ) {
+        if (enemy) {
+          if (enemy.onDestroy !== undefined) {
+            enemy.onDestroy();
+          }
+
+          enemy.destroy();
+        }
       }
     }
     // Destroy enemy lasers out of bound
