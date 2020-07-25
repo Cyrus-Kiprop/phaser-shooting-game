@@ -1,6 +1,12 @@
 import "phaser";
 import Button from "../Objects/Button";
-import { Player, GunShip, CarrierShip, ChaserShip } from "../Entities/Entities";
+import {
+  Player,
+  GunShip,
+  CarrierShip,
+  ChaserShip,
+  ScrollingBackground,
+} from "../Entities/Entities";
 
 export default class SceneMain extends Phaser.Scene {
   constructor() {
@@ -86,6 +92,13 @@ export default class SceneMain extends Phaser.Scene {
       ],
       laser: this.sound.add("sndLaser"),
     };
+
+    this.backgrounds = [];
+    for (var i = 0; i < 5; i++) {
+      // create five scrolling backgrounds
+      var bg = new ScrollingBackground(this, "sprBg0", i * 10);
+      this.backgrounds.push(bg);
+    }
 
     // instantiate a new player
     this.player = new Player(
@@ -209,6 +222,11 @@ export default class SceneMain extends Phaser.Scene {
         playerLaser.destroy();
       }
     });
+
+    // update the background stars
+    for (var i = 0; i < this.backgrounds.length; i++) {
+      this.backgrounds[i].update();
+    }
 
     // End of kill rules
 
