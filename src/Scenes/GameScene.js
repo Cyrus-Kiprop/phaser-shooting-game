@@ -204,6 +204,54 @@ export default class SceneMain extends Phaser.Scene {
 
       enemy.update();
     }
+
+    if (
+      enemy.x < -enemy.displayWidth ||
+      enemy.x > this.game.config.width + enemy.displayWidth ||
+      enemy.y < -enemy.displayHeight * 4 ||
+      enemy.y > this.game.config.height + enemy.displayHeight
+    ) {
+      if (enemy) {
+        if (enemy.onDestroy !== undefined) {
+          enemy.onDestroy();
+        }
+
+        enemy.destroy();
+      }
+    }
+    // Destroy enemy lasers out of bound
+    for (var i = 0; i < this.enemyLasers.getChildren().length; i++) {
+      var laser = this.enemyLasers.getChildren()[i];
+      laser.update();
+
+      if (
+        laser.x < -laser.displayWidth ||
+        laser.x > this.game.config.width + laser.displayWidth ||
+        laser.y < -laser.displayHeight * 4 ||
+        laser.y > this.game.config.height + laser.displayHeight
+      ) {
+        if (laser) {
+          laser.destroy();
+        }
+      }
+    }
+
+    // Destroy player laser
+    for (var i = 0; i < this.playerLasers.getChildren().length; i++) {
+      var laser = this.playerLasers.getChildren()[i];
+      laser.update();
+
+      if (
+        laser.x < -laser.displayWidth ||
+        laser.x > this.game.config.width + laser.displayWidth ||
+        laser.y < -laser.displayHeight * 4 ||
+        laser.y > this.game.config.height + laser.displayHeight
+      ) {
+        if (laser) {
+          laser.destroy();
+        }
+      }
+    }
   }
 
   getEnemiesByType(type) {
