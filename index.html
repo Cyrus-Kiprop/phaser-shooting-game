@@ -9,6 +9,7 @@
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="./assets/stylesheets/main.css" />
     <title>Document</title>
   </head>
 
@@ -16,10 +17,14 @@
     <div id="shooter-game">
       <div id="instructions" class="hidden">
         <i class="fa fa-window-close fa-2x closeButton" aria-hidden="true"></i>
-        <img src="./assets/images/gameInstructions.png" alt="" />
-      </div>
-      <div class="game-controls">
-        <img src="./assets/ui/controls.jpg" alt="" />
+        <div class="controls">
+          <h2>Help: Controls</h2>
+          <span>W - Upward motion</span>
+          <span>A - Left motion</span>
+          <span>S - Down motion</span>
+          <span>D - Right motion</span>
+          <span>SPACE - Shoot</span>
+        </div>
       </div>
       <div class="inputwrap">
         <input type="text" id="username" value="" placeholder="Enter Name" />
