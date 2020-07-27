@@ -61,8 +61,8 @@ export default class TitleScene extends Phaser.Scene {
       {
         fontFamily: "monospace",
         fontSize: 48,
-        fontStyle: "italic",
-        color: "red",
+        fontStyle: "bold",
+        color: "#51DAFD",
         // align: "left",
       }
     );

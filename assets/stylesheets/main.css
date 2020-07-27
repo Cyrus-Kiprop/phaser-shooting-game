@@ -1,4 +1,7 @@
-#instructions {
+body {
+  padding: auto;
+}
+.instructions {
   display: flex;
   flex-direction: column;
   padding: 1rem;
@@ -9,7 +12,14 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border: 2px solid #51dafd;
+  border-radius: 4px;
 }
+
+.hidden {
+  display: none !important;
+}
+
 #instructions > i {
   margin-left: auto;
   font-size: 16px;
@@ -31,4 +41,29 @@
 .controls span {
   font-size: 22px;
   font-weight: 500;
+}
+
+.user-input > input {
+  font-family: "monospace";
+  position: absolute;
+  border: none;
+  top: 29%;
+  left: 50%;
+  font-size: 35px;
+  transform: translate(-50%, -50%);
+  border: 2px solid #51dafd;
+  border-radius: 5px;
+  background: transparent;
+  text-align: center;
+  color: #51dafd;
+  width: 250px;
+}
+
+input:hover {
+  outline: none;
+}
+
+input::placeholder {
+  color: inherit;
+  text-align: center;
 }
