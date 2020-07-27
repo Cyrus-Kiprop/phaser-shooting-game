@@ -1,4 +1,5 @@
 import "phaser";
+import api from "../Utils/ApiUtils";
 import Button from "../Objects/Button";
 import {
   Player,
@@ -31,7 +32,7 @@ export default class SceneMain extends Phaser.Scene {
     });
     this.load.image("sprLaserEnemy0", "assets/ui/sprLaserEnemy0.png");
     this.load.image("sprLaserPlayer", "assets/ui/sprLaserPlayer.png");
-    this.load.spritesheet("sprPlayer", "assets/ui/sprPlayer.png", {
+    this.load.spritesheet("sprPlayer", "assets/ui/sprPlayer1.png", {
       frameWidth: 16,
       frameHeight: 16,
     });
@@ -39,8 +40,22 @@ export default class SceneMain extends Phaser.Scene {
     this.load.audio("sndExplode0", "assets/sndExplode0.wav");
     this.load.audio("sndExplode1", "assets/sndExplode1.wav");
     this.load.audio("sndLaser", "assets/sndLaser.wav");
+
+    this.load.image("phaserLogo", "assets/logo.png");
   }
   create() {
+    console.log(this.sys.game.globals.gameID);
+    this.box = this.add.rectangle(0, 100, 200, 200, "white");
+    this.score = this.sys.game.globals.score;
+    this.leaderBoard = this.add
+      .text(this.game.config.width * 0.9, 30, `Score: ${this.score}`, {
+        fontFamily: "monospace",
+        fontSize: 18,
+        fontStyle: "Bold",
+        color: "green",
+        align: "center",
+      })
+      .setOrigin(1);
     const animationCreator = (key, frameValue, frameRate, repeat) => {
       this.anims.create({
         key,
@@ -189,16 +204,21 @@ export default class SceneMain extends Phaser.Scene {
     }
     // define the kill rules
     // player dies on contact with enemy ship
-    this.physics.add.overlap(this.player, this.enemies, function (
-      player,
-      enemy
-    ) {
-      if (!player.getData("isDead") && !enemy.getData("isDead")) {
-        player.explode(false);
-        player.onDestroy();
-        enemy.explode(true);
-      }
-    });
+    this.physics.add.overlap(
+      this.player,
+      this.enemies,
+      function (player, enemy) {
+        if (!player.getData("isDead") && !enemy.getData("isDead")) {
+          player.explode(false);
+          player.onDestroy();
+          api.setScore(
+            this.sys.game.globals.gameID,
+            this.sys.game.globals.score
+          );
+          enemy.explode(true);
+        }
+      }.bind(this)
+    );
 
     this.physics.add.overlap(this.player, this.enemyLasers, function (
       player,
@@ -207,23 +227,26 @@ export default class SceneMain extends Phaser.Scene {
       if (!player.getData("isDead") && !laser.getData("isDead")) {
         player.explode(false);
         player.onDestroy();
+        api.setScore(this.sys.game.globals.gameID, this.sys.game.globals.score);
         laser.destroy();
       }
-    });
+    }.bind(this));
 
-    this.physics.add.collider(this.playerLasers, this.enemies, function (
-      playerLaser,
-      enemy
-    ) {
-      if (enemy) {
-        if (enemy.onDestroy !== undefined) {
-          enemy.onDestroy();
+    this.physics.add.collider(
+      this.playerLasers,
+      this.enemies,
+      function (playerLaser, enemy) {
+        if (enemy) {
+          if (enemy.onDestroy !== undefined) {
+            this.sys.game.globals.score += 100;
+            enemy.onDestroy();
+          }
+
+          enemy.explode(true);
+          playerLaser.destroy();
         }
-
-        enemy.explode(true);
-        playerLaser.destroy();
-      }
-    });
+      }.bind(this)
+    );
 
     // update the background stars
     for (var i = 0; i < this.backgrounds.length; i++) {

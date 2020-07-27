@@ -1,5 +1,6 @@
 import "phaser";
 import Button from "../Objects/Button";
+import api from "../Utils/ApiUtils";
 
 import config from "../Config/config";
 
@@ -9,6 +10,17 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create() {
+    // regiser the game
+    api.registerGame().then(
+      function (result) {
+        this.sys.game.globals.gameID = result;
+
+        // set the score to board
+        console.log(result.length);
+        api.setScore(result, 100);
+      }.bind(this)
+    );
+
     // Game
     this.gameButton = new Button(
       this,

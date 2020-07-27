@@ -32,10 +32,10 @@ async function registerGame() {
 }
 
 async function setScore(gameId, scoreValue = 0) {
-  const url = `${baseUrl}/games/${gameId}/scores/`;
+  const url = `${baseUrl}games/${gameId}/scores/`;
 
   const scoreSet = {
-    user: "John Doe",
+    user: "Cyrus Kiprop",
     score: scoreValue,
   };
 
@@ -43,10 +43,10 @@ async function setScore(gameId, scoreValue = 0) {
     const response = await fetch(url, {
       method: "POST",
       mode: "cors",
-      cache: "no-cache",
       credentials: "same-origin",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Request-Method": "POST",
       },
       body: JSON.stringify(scoreSet),
     });
