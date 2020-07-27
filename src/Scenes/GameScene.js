@@ -1,6 +1,8 @@
 import "phaser";
 import api from "../Utils/ApiUtils";
 import Button from "../Objects/Button";
+import ParallaxBg from "../Entities/parallaxBg";
+
 import {
   Player,
   GunShip,
@@ -31,21 +33,43 @@ export default class SceneMain extends Phaser.Scene {
       frameHeight: 16,
     });
     this.load.image("sprLaserEnemy0", "assets/ui/sprLaserEnemy0.png");
-    this.load.image("sprLaserPlayer", "assets/ui/sprLaserPlayer.png");
-    this.load.spritesheet("sprPlayer", "assets/ui/sprPlayer1.png", {
-      frameWidth: 16,
-      frameHeight: 16,
+    this.load.spritesheet("sprLaserPlayer", "assets/ui/playerBullet.png", {
+        frameWidth: 16,
+        frameHeight: 16,
     });
+    this.load.spritesheet(
+      "sprPlayer",
+      "assets/ui/starship_animation_walk.png",
+      {
+        frameWidth: 56,
+        frameHeight: 56,
+      }
+    );
 
     this.load.audio("sndExplode0", "assets/sndExplode0.wav");
     this.load.audio("sndExplode1", "assets/sndExplode1.wav");
     this.load.audio("sndLaser", "assets/sndLaser.wav");
 
     this.load.image("phaserLogo", "assets/logo.png");
+
+    // load some bavkground images
+    this.load.image("Planet0", "assets/ui/bg-sprites/Planet0.png");
+    this.load.image("Planet1", "assets/ui/bg-sprites/Planet1.png");
+    this.load.image("Planet2", "assets/ui/bg-sprites/Planet2.png");
+    this.load.image("Planet3", "assets/ui/bg-sprites/Planet3.png");
+    this.load.image("Planet4", "assets/ui/bg-sprites/Planet4.png");
+    this.load.image("Planet5", "assets/ui/bg-sprites/Planet5.png");
+    this.load.image("Planet6", "assets/ui/bg-sprites/Planet6.png");
+    this.load.image("Planet7", "assets/ui/bg-sprites/Planet7.png");
+    this.load.image("Planet8", "assets/ui/bg-sprites/Planet8.png");
+    this.load.image("Planet9", "assets/ui/bg-sprites/PLanet_Shadow_1.png");
+    this.load.image("Space", "assets/ui/bg-sprites/Space.png");
+    this.load.image("Space_1", "assets/ui/bg-sprites/Space_1.png");
+    this.load.image("Sun_00000", "assets/ui/bg-sprites/Sun_00000.png");
+    this.load.image("Sun_00001", "assets/ui/bg-sprites/Sun_00001.png");
   }
   create() {
     console.log(this.sys.game.globals.gameID);
-    this.box = this.add.rectangle(0, 100, 200, 200, "white");
     this.score = this.sys.game.globals.score;
     this.leaderBoard = this.add
       .text(this.game.config.width * 0.9, 30, `Score: ${this.score}`, {
@@ -99,6 +123,14 @@ export default class SceneMain extends Phaser.Scene {
       );
     });
 
+    // add the parallax  background image
+    this.backgrounds = [];
+    for (let i = 0; i < 3; i += 1) {
+      const keys = ["Planet3", "Space", "Sun_00000", "Space_1"];
+      const bg = new ParallaxBg(this, keys[i], i * 10);
+      this.backgrounds.push(bg);
+    }
+
     // this needs to be in the global scope
     this.sfx = {
       explosions: [
@@ -108,12 +140,12 @@ export default class SceneMain extends Phaser.Scene {
       laser: this.sound.add("sndLaser"),
     };
 
-    this.backgrounds = [];
-    for (var i = 0; i < 5; i++) {
-      // create five scrolling backgrounds
-      var bg = new ScrollingBackground(this, "sprBg0", i * 10);
-      this.backgrounds.push(bg);
-    }
+    // this.backgrounds = [];
+    // for (var i = 0; i < 5; i++) {
+    //   // create five scrolling backgrounds
+    //   var bg = new ParallaxBg(this, "sprBg0", i * 10);
+    //   this.backgrounds.push(bg);
+    // }
 
     // instantiate a new player
     this.player = new Player(
@@ -220,17 +252,21 @@ export default class SceneMain extends Phaser.Scene {
       }.bind(this)
     );
 
-    this.physics.add.overlap(this.player, this.enemyLasers, function (
-      player,
-      laser
-    ) {
-      if (!player.getData("isDead") && !laser.getData("isDead")) {
-        player.explode(false);
-        player.onDestroy();
-        api.setScore(this.sys.game.globals.gameID, this.sys.game.globals.score);
-        laser.destroy();
-      }
-    }.bind(this));
+    this.physics.add.overlap(
+      this.player,
+      this.enemyLasers,
+      function (player, laser) {
+        if (!player.getData("isDead") && !laser.getData("isDead")) {
+          player.explode(false);
+          player.onDestroy();
+          api.setScore(
+            this.sys.game.globals.gameID,
+            this.sys.game.globals.score
+          );
+          laser.destroy();
+        }
+      }.bind(this)
+    );
 
     this.physics.add.collider(
       this.playerLasers,
@@ -317,6 +353,11 @@ export default class SceneMain extends Phaser.Scene {
       if (enemy.getData("type") == type) {
         arr.push(enemy);
       }
+      this.y = Phaser.Math.Clamp(
+        this.y,
+        0,
+        this.scene.scene.game.config.height
+      );
     }
     return arr;
   }
