@@ -63,11 +63,11 @@ function resetScore() {
   this.sys.game.globals.score = 0;
 }
 
-async function getScore(id) {
-  id = 'CMTUivGEZB8gyhrjwRwz';
+async function getScore() {
+  const id = 'CMTUivGEZB8gyhrjwRwz';
   const response = await fetch(`${baseUrl}games/${id}/scores/`);
-  const result = await response.json();
-  return result;
+  const data = await response.json();
+  window.localStorage.setItem('listing', JSON.stringify(data.result));
 }
 
 const api = {

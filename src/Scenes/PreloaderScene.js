@@ -1,6 +1,9 @@
 import 'phaser';
 import config from '../Config/config';
 import domApi from '../Entities/DomManipulation';
+import api from '../Utils/ApiUtils';
+
+const { getScore } = api;
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
@@ -92,6 +95,7 @@ export default class PreloaderScene extends Phaser.Scene {
   create() {}
 
   init() {
+    getScore();
     this.readyCount = 0;
   }
 
