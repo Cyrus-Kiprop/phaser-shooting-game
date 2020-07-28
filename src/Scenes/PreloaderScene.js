@@ -102,7 +102,7 @@ export default class PreloaderScene extends Phaser.Scene {
       frameWidth: 16,
       frameHeight: 16,
     });
-    this.load.image('sprEnemy1', 'assets/ui/frozenmoons/enemypodcharged.png');
+    this.load.image('sprEnemy1', 'assets/ui/enemypodcharged.png');
     this.load.spritesheet('sprEnemy2', 'assets/ui/sprEnemy2.png', {
       frameWidth: 16,
       frameHeight: 16,
