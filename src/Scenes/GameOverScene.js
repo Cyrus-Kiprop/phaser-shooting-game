@@ -4,6 +4,7 @@ import api from '../Utils/ApiUtils';
 
 import config from '../Config/config';
 import domApi from '../Entities/DomManipulation';
+
 const { hideUserInput } = domApi;
 const { resetScore, setScore } = api;
 
@@ -34,7 +35,7 @@ export default class GameOverScene extends Phaser.Scene {
           fontStyle: 'Bold',
           color: 'red',
           align: 'center',
-        }
+        },
       )
       .setOrigin(0.5);
 
@@ -52,7 +53,7 @@ export default class GameOverScene extends Phaser.Scene {
       'blueButton2',
       'Restart',
       'Game',
-      [this.updateScore]
+      [this.updateScore],
     );
 
     // Options
@@ -64,7 +65,7 @@ export default class GameOverScene extends Phaser.Scene {
       'blueButton2',
       'Main Menu',
       'Title',
-      [hideUserInput]
+      [hideUserInput],
     );
   }
 }

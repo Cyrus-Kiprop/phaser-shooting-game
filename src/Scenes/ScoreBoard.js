@@ -2,11 +2,9 @@ import 'phaser';
 import Button from '../Objects/Button';
 import config from '../Config/config';
 import domApi from '../Entities/DomManipulation';
-import api from '../Utils/ApiUtils';
 import sceneUtils from './SceneUtils';
 
 const { hideUserInput } = domApi;
-const { getScore } = api;
 const { compare } = sceneUtils;
 
 export default class ScoreBoard extends Phaser.Scene {
@@ -47,7 +45,7 @@ export default class ScoreBoard extends Phaser.Scene {
       'blueButton2',
       'Main Menu',
       'Title',
-      [hideUserInput]
+      [hideUserInput],
     );
   }
 }
