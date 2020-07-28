@@ -1,5 +1,7 @@
 const baseUrl =
-  "https://us-central1-js-capstone-backend.cloudfunctions.net/api/";
+  'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
+
+const id = 'CMTUivGEZB8gyhrjwRwz';
 
 const gameID = (data) => {
   const string = data.result;
@@ -13,15 +15,15 @@ function storeId(dataID) {
 async function registerGame() {
   try {
     const response = await fetch(`${baseUrl}games/`, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: "StarShip Shooting Game",
+        name: 'StarShip Shooting Game',
       }),
     });
     const data = await response.json();
@@ -31,33 +33,38 @@ async function registerGame() {
   }
 }
 
-async function setScore(gameId, scoreValue = 0) {
-  const url = `${baseUrl}games/${gameId}/scores/`;
-
+async function setScore(username, scoreValue) {
+  console.log(scoreValue);
+  const url = `${baseUrl}games/CMTUivGEZB8gyhrjwRwz/scores/`;
   const scoreSet = {
-    user: "Cyrus Kiprop",
+    user: username,
     score: scoreValue,
   };
 
   try {
     const response = await fetch(url, {
-      method: "POST",
-      mode: "cors",
-      credentials: "same-origin",
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'same-origin',
       headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Request-Method": "POST",
+        'Content-Type': 'application/json',
+        'Access-Control-Request-Method': 'POST',
       },
       body: JSON.stringify(scoreSet),
     });
     const data = await response.json();
-    console.log(data.result);
+    console.log(data);
   } catch (e) {
     console.log(e);
   }
 }
 
+function resetScore() {
+  this.sys.game.globals.score = 0;
+}
+
 async function getScore(id) {
+  id = 'CMTUivGEZB8gyhrjwRwz';
   const response = await fetch(`${baseUrl}games/${id}/scores/`);
   const result = await response.json();
   return result;
@@ -68,6 +75,7 @@ const api = {
   setScore,
   getScore,
   storeId,
+  resetScore,
 };
 
 export default api;

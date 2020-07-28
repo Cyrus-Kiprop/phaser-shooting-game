@@ -12,15 +12,6 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    // const checkId = () =>
-    // JSON.parse(window.localStorage.getItem('gameId')) == undefined;
-    // api.registerGame().then((result) => {
-    //   this.sys.game.globals.gameID = result;
-    //   window.localStorage.setItem('gameID', JSON.stringify(result));
-    //   api.setScore(result, 100);
-    // });
-    // }
-    // Game
     this.updateUser = () => (this.sys.game.globals.username = userInput());
     this.gameButton = new Button(
       this,
