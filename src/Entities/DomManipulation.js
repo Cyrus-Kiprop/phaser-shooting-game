@@ -16,7 +16,6 @@ const domApi = (() => {
   const isValid = (input) => input.length > 2;
   const getUsername = () => {
     const input = document.getElementById('username');
-    console.log(input.value);
 
     return input.value;
   };
@@ -24,7 +23,6 @@ const domApi = (() => {
   const userInput = () => (isValid(getUsername()) ? getUsername() : 'Batman');
 
   const hideUserInput = () => {
-    console.log(form);
     form.classList.toggle('hidden');
   };
 
