@@ -42,7 +42,7 @@ export default class OptionsScene extends Phaser.Scene {
       'blueButton2',
       'Menu',
       'Title',
-      [hideUserInput]
+      [hideUserInput],
     );
   }
 

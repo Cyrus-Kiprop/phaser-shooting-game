@@ -22,7 +22,7 @@ export default class TitleScene extends Phaser.Scene {
       'blueButton2',
       'Play',
       'Game',
-      [hideUserInput, this.updateUser]
+      [hideUserInput, this.updateUser],
     );
 
     this.scoreBoard = new Button(
@@ -33,7 +33,7 @@ export default class TitleScene extends Phaser.Scene {
       'blueButton2',
       'Board',
       'ScoreBoard',
-      [hideUserInput]
+      [hideUserInput],
     );
 
     // Options
@@ -45,7 +45,7 @@ export default class TitleScene extends Phaser.Scene {
       'blueButton2',
       'Options',
       'Options',
-      [hideUserInput]
+      [hideUserInput],
     );
 
     // Credits
@@ -57,7 +57,7 @@ export default class TitleScene extends Phaser.Scene {
       'blueButton2',
       'Credits',
       'Credits',
-      [hideUserInput]
+      [hideUserInput],
     );
 
     this.controls = new Button(
@@ -68,7 +68,7 @@ export default class TitleScene extends Phaser.Scene {
       'blueButton2',
       'Controls',
       '_',
-      [showControls, hideUserInput]
+      [showControls, hideUserInput],
     );
 
     this.title = this.add.text(
@@ -81,7 +81,7 @@ export default class TitleScene extends Phaser.Scene {
         fontStyle: 'bold',
         color: '#51DAFD',
         // align: "left",
-      }
+      },
     );
 
     this.model = this.sys.game.globals.model;

@@ -20,7 +20,7 @@ export default class CreditsScene extends Phaser.Scene {
       config.width / 2,
       config.height / 2,
       config.width,
-      config.height,
+      config.height
     );
 
     Phaser.Display.Align.In.Center(this.creditsText, this.zone);
@@ -35,7 +35,7 @@ export default class CreditsScene extends Phaser.Scene {
       ease: 'Power1',
       duration: 3000,
       delay: 1000,
-      onComplete() {
+      onComplete: () => {
         this.destroy;
       },
     });
@@ -46,11 +46,12 @@ export default class CreditsScene extends Phaser.Scene {
       ease: 'Power1',
       duration: 8000,
       delay: 1000,
-      onComplete: function () {
+      onComplete: () => {
+        console.log(this.madeByTween.destroy);
         this.madeByTween.destroy;
         domApi.hideUserInput();
         this.scene.start('Title');
-      }.bind(this),
+      },
     });
   }
 }

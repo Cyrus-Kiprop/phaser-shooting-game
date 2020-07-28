@@ -6,6 +6,7 @@ import config from '../Config/config';
 import domApi from '../Entities/DomManipulation';
 
 const { hideUserInput } = domApi;
+const { setScore } = api;
 
 export default class GameOverScene extends Phaser.Scene {
   constructor() {
@@ -39,9 +40,8 @@ export default class GameOverScene extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.updateScore = () => {
-      console.log(this.sys.game.globals.username);
       setScore('Cyrus Kiprop', this.sys.game.globals.score);
-      this.sys.game.globals.score = this.sys.game.globals.score * 0;
+      this.sys.game.globals.score *= 0;
     };
 
     this.gameButton = new Button(
