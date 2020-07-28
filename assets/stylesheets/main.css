@@ -1,6 +1,7 @@
 body {
   padding: auto;
 }
+
 .instructions {
   display: flex;
   flex-direction: column;
@@ -24,29 +25,29 @@ body {
   font-size: 16px;
   z-index: 100;
 }
+
 .controls {
   background-color: #f0f9fe;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: auto;
   padding: 2rem;
   width: 200px;
   margin-left: auto;
 }
+
 .controls > h2 {
   font-size: 30px;
   font-weight: 700;
 }
+
 .controls span {
   font-size: 22px;
   font-weight: 500;
 }
 
 .user-input > input {
-  font-family: 'monospace';
   position: absolute;
-  border: none;
   left: 278px;
   top: 143px;
   font-size: 35px;
