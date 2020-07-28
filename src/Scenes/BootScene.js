@@ -1,17 +1,19 @@
-import "phaser";
+import 'phaser';
+import domApi from '../Entities/DomManipulation';
+
+const { hideUserInput } = domApi;
 
 export default class BootScene extends Phaser.Scene {
   constructor() {
-    super("Boot");
+    super('Boot');
   }
 
   preload() {
-    this.load.image("logo", "../assets/logo.png");
+    this.load.image('logo', '../assets/logo.png');
   }
 
   create() {
-    console.log("Already booted up");
-    // execute the preloader a soon as the boot scene is complete
-    this.scene.start("Preloader");
+    hideUserInput();
+    this.scene.start('Preloader');
   }
 }

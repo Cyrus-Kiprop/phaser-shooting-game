@@ -1,94 +1,92 @@
-import "phaser";
-import config from "../Config/config";
+import 'phaser';
+import config from '../Config/config';
+import domApi from '../Entities/DomManipulation';
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
-    super("Preloader");
+    super('Preloader');
   }
 
   preload() {
-    this.add.image(400, 200, "assets/logo.png");
+    this.add.image(400, 200, 'assets/logo.png');
 
     // add a progress bar
-    let progressBar = this.add.graphics();
-    let progressBox = this.add.graphics();
+    const progressBar = this.add.graphics();
+    const progressBox = this.add.graphics();
     progressBox.fillStyle(0x222222, 0.8);
     progressBox.fillRect(240, 270, 320, 50);
 
-    let width = this.cameras.main.width;
-    let height = this.cameras.main.height;
+    const { width } = this.cameras.main;
+    const { height } = this.cameras.main;
 
-    let loadingText = this.make.text({
+    const loadingText = this.make.text({
       x: width / 2,
       y: height / 2 - 50,
-      text: "loading...",
+      text: 'loading...',
       style: {
-        font: "20px monospace",
-        fill: "#fff",
+        font: '20px monospace',
+        fill: '#fff',
       },
     });
     loadingText.setOrigin(0.5, 0.5);
 
     // percentage indicator
-    let percentText = this.make.text({
+    const percentText = this.make.text({
       x: width / 2,
       y: height / 2 - 5,
-      text: "0%",
+      text: '0%',
       style: {
-        font: "18px monospace",
-        fill: "#ffffff",
+        font: '18px monospace',
+        fill: '#ffffff',
       },
     });
     percentText.setOrigin(0.5, 0.5);
 
-    let assetText = this.make.text({
+    const assetText = this.make.text({
       x: width / 2,
       y: height / 2 + 50,
-      text: "",
+      text: '',
       style: {
-        font: "18px monospace",
-        fill: "#ffffff",
+        font: '18px monospace',
+        fill: '#ffffff',
       },
     });
     assetText.setOrigin(0.5, 0.5);
 
     // update the progress bar
-    this.load.on("progress", function (value) {
-      percentText.setText(value * 100 + "%");
+    this.load.on('progress', (value) => {
+      percentText.setText(`${value * 100}%`);
       progressBar.clear();
       progressBar.fillStyle(0xffffff, 1);
       progressBar.fillRect(250, 280, 300 * value, 30);
     });
 
     // update the progress text
-    this.load.on("fileprogress", function (file) {
-      assetText.setText("loading assets:" + file.key);
+    this.load.on('fileprogress', (file) => {
+      assetText.setText(`loading assets:${file.key}`);
     });
 
     // remove progress bar when complete
-    this.load.on(
-      "complete",
-      function () {
-        progressBar.destroy();
-        progressBox.destroy();
-        loadingText.destroy();
-        percentText.destroy();
-        assetText.destroy();
-        this.ready();
-      }.bind(this)
-    );
+    this.load.on('complete', () => {
+      progressBar.destroy();
+      progressBox.destroy();
+      loadingText.destroy();
+      percentText.destroy();
+      assetText.destroy();
+      this.ready();
+    });
 
     // initiate some delay
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 
     // load assets needed in our game
-    this.load.image("blueButton1", "assets/ui/blue_button02.png");
-    this.load.image("blueButton2", "assets/ui/blue_button03.png");
-    this.load.image("phaserLogo", "assets/logo.png");
-    this.load.image("phaserLogo", "assets/logo.png");
-    this.load.image("box", "assets/ui/grey_box.png");
-    this.load.image("checkedBox", "assets/ui/blue_boxCheckmark.png");
-    this.load.audio("bgMusic", ["assets/TownTheme.mp3"]);
+    this.load.image('blueButton1', 'assets/ui/blue_button02.png');
+    this.load.image('blueButton2', 'assets/ui/blue_button03.png');
+    this.load.image('phaserLogo', 'assets/logo.png');
+    this.load.image('phaserLogo', 'assets/logo.png');
+    this.load.image('box', 'assets/ui/grey_box.png');
+    this.load.image('checkedBox', 'assets/ui/blue_boxCheckmark.png');
+    this.load.audio('bgMusic', ['assets/TownTheme.mp3']);
   }
 
   create() {}
@@ -98,11 +96,11 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   ready() {
-    console.log("the Title scene has been loaded");
-    this.scene.start("Title");
-    this.readCount++;
+    domApi.hideUserInput();
+    this.scene.start('Title');
+    this.readCount += 1;
     if (this.readyCount === 2) {
-      this.scene.start("Title");
+      this.scene.start('Title');
     }
   }
 }

@@ -5,6 +5,8 @@ import ParallaxBg from '../Entities/parallaxBg';
 
 import { Player, GunShip, CarrierShip, ChaserShip } from '../Entities/Entities';
 
+const { setScore } = api;
+
 export default class SceneMain extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -50,15 +52,20 @@ export default class SceneMain extends Phaser.Scene {
   }
 
   create() {
-    this.score = this.sys.game.globals.score;
+    console.log(this.sys.game.globals.username);
     this.leaderBoard = this.add
-      .text(this.game.config.width * 0.9, 30, `Score: ${this.score}`, {
-        fontFamily: 'monospace',
-        fontSize: 18,
-        fontStyle: 'Bold',
-        color: 'green',
-        align: 'center',
-      })
+      .text(
+        this.game.config.width * 0.9,
+        30,
+        `Score: ${this.sys.game.globals.score}`,
+        {
+          fontFamily: 'monospace',
+          fontSize: 18,
+          fontStyle: 'Bold',
+          color: 'green',
+          align: 'center',
+        }
+      )
       .setOrigin(1);
     const animationCreator = (key, frameValue, frameRate, repeat) => {
       this.anims.create({
@@ -119,13 +126,6 @@ export default class SceneMain extends Phaser.Scene {
       ],
       laser: this.sound.add('sndLaser'),
     };
-
-    // this.backgrounds = [];
-    // for (let i = 0; i < 5; i++) {
-    //   // create five scrolling backgrounds
-    //   let bg = new ParallaxBg(this, "sprBg0", i * 10);
-    //   this.backgrounds.push(bg);
-    // }
 
     // instantiate a new player
     this.player = new Player(
@@ -220,7 +220,7 @@ export default class SceneMain extends Phaser.Scene {
       if (!player.getData('isDead') && !enemy.getData('isDead')) {
         player.explode(false);
         player.onDestroy();
-        api.setScore(this.sys.game.globals.gameID, this.sys.game.globals.score);
+        setScore(this.sys.game.globals.username, this.sys.game.globals.score);
         enemy.explode(true);
       }
     });
@@ -228,8 +228,8 @@ export default class SceneMain extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.enemyLasers, (player, laser) => {
       if (!player.getData('isDead') && !laser.getData('isDead')) {
         player.explode(false);
+        setScore(this.sys.game.globals.username, this.sys.game.globals.score);
         player.onDestroy();
-        api.setScore(this.sys.game.globals.gameID, this.sys.game.globals.score);
         laser.destroy();
       }
     });
@@ -251,7 +251,7 @@ export default class SceneMain extends Phaser.Scene {
     );
 
     // update the background stars
-    for (let i = 0; i < this.backgrounds.length; i++) {
+    for (let i = 0; i < this.backgrounds.length; i += 1) {
       this.backgrounds[i].update();
     }
 
@@ -314,7 +314,7 @@ export default class SceneMain extends Phaser.Scene {
 
   getEnemiesByType(type) {
     const arr = [];
-    for (let i = 0; i < this.enemies.getChildren().length; i += 1 {
+    for (let i = 0; i < this.enemies.getChildren().length; i += 1) {
       const enemy = this.enemies.getChildren()[i];
       if (enemy.getData('type') === type) {
         arr.push(enemy);
