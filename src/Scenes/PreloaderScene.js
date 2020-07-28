@@ -1,5 +1,4 @@
 import 'phaser';
-import config from '../Config/config';
 import domApi from '../Entities/DomManipulation';
 import api from '../Utils/ApiUtils';
 
@@ -130,8 +129,6 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('Space', 'assets/ui/bg-sprites/Space.png');
     this.load.image('Space_1', 'assets/ui/bg-sprites/Space_1.png');
   }
-
-  create() {}
 
   init() {
     getScore();

@@ -35,6 +35,7 @@ export default class ScoreBoard extends Phaser.Scene {
       this.add.text(config.width * 0.45, pos, user.slice(0, 14), 24);
       this.add.text(config.width * 0.65, pos, score, 24);
       pos += 20;
+      return 0;
     });
 
     this.optionsButton = new Button(
@@ -45,7 +46,7 @@ export default class ScoreBoard extends Phaser.Scene {
       'blueButton2',
       'Main Menu',
       'Title',
-      [hideUserInput],
+      [hideUserInput]
     );
   }
 }

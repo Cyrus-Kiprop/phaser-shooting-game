@@ -1,6 +1,5 @@
-const baseUrl = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
-
-const id = 'CMTUivGEZB8gyhrjwRwz';
+const baseUrl =
+  'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
 
 const gameID = (data) => {
   const string = data.result;
@@ -28,12 +27,11 @@ async function registerGame() {
     const data = await response.json();
     return Promise.resolve(gameID(data));
   } catch (e) {
-    console.log(e);
+    return e.message;
   }
 }
 
 async function setScore(username, scoreValue) {
-  console.log(scoreValue);
   const url = `${baseUrl}games/CMTUivGEZB8gyhrjwRwz/scores/`;
   const scoreSet = {
     user: username,
@@ -52,9 +50,9 @@ async function setScore(username, scoreValue) {
       body: JSON.stringify(scoreSet),
     });
     const data = await response.json();
-    console.log(data);
+    return data;
   } catch (e) {
-    console.log(e);
+    return e.message;
   }
 }
 

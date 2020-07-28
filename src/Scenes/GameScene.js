@@ -1,11 +1,10 @@
 import 'phaser';
 import api from '../Utils/ApiUtils';
-import Button from '../Objects/Button';
 import ParallaxBg from '../Entities/parallaxBg';
-
-import {
-  Player, GunShip, CarrierShip, ChaserShip,
-} from '../Entities/Entities';
+import Player from '../Entities/Player';
+import GunShip from '../Entities/GunShip';
+import CarrierShip from '../Entities/CarrierShip';
+import ChaserShip from '../Entities/ChaserShip';
 
 const { setScore, getScore } = api;
 
@@ -15,7 +14,6 @@ export default class SceneMain extends Phaser.Scene {
   }
 
   create() {
-    console.log(this.sys.game.globals.username);
     this.leaderBoard = this.add
       .text(
         this.game.config.width * 0.9,
@@ -27,7 +25,7 @@ export default class SceneMain extends Phaser.Scene {
           fontStyle: 'Bold',
           color: 'green',
           align: 'center',
-        },
+        }
       )
       .setOrigin(1);
     const animationCreator = (key, frameValue, frameRate, repeat) => {
@@ -69,7 +67,7 @@ export default class SceneMain extends Phaser.Scene {
         animation.key,
         animation.frameValue,
         animation.frameRate,
-        animation.repeat,
+        animation.repeat
       );
     });
 
@@ -95,7 +93,7 @@ export default class SceneMain extends Phaser.Scene {
       this,
       this.game.config.width * 0.5,
       this.game.config.height * 0.5,
-      'sprPlayer',
+      'sprPlayer'
     );
 
     // enemy dies on contact with player bullet
@@ -106,7 +104,7 @@ export default class SceneMain extends Phaser.Scene {
     this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     this.keySpace = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.SPACE,
+      Phaser.Input.Keyboard.KeyCodes.SPACE
     );
     this.enemies = this.add.group();
     this.enemyLasers = this.add.group();
@@ -121,21 +119,21 @@ export default class SceneMain extends Phaser.Scene {
           enemy = new GunShip(
             this,
             Phaser.Math.Between(0, this.game.config.width),
-            0,
+            0
           );
         } else if (Phaser.Math.Between(0, 10) >= 5) {
           if (this.getEnemiesByType('ChaserShip').length < 5) {
             enemy = new ChaserShip(
               this,
               Phaser.Math.Between(0, this.game.config.width),
-              0,
+              0
             );
           }
         } else {
           enemy = new CarrierShip(
             this,
             Phaser.Math.Between(0, this.game.config.width),
-            0,
+            0
           );
         }
 
@@ -172,7 +170,7 @@ export default class SceneMain extends Phaser.Scene {
       } else {
         this.player.setData(
           'timerShootTick',
-          this.player.getData('timerShootDelay') - 1,
+          this.player.getData('timerShootDelay') - 1
         );
         this.player.setData('isShooting', false);
       }
@@ -212,7 +210,7 @@ export default class SceneMain extends Phaser.Scene {
           enemy.explode(true);
           playerLaser.destroy();
         }
-      },
+      }
     );
 
     // update the background stars
@@ -222,16 +220,16 @@ export default class SceneMain extends Phaser.Scene {
 
     // End of kill rules
 
-    for (let i = 0; i < this.enemies.getChildren().length; i++) {
+    for (let i = 0; i < this.enemies.getChildren().length; i += 1) {
       const enemy = this.enemies.getChildren()[i];
 
       enemy.update();
 
       if (
-        enemy.x < -enemy.displayWidth
-        || enemy.x > this.game.config.width + enemy.displayWidth
-        || enemy.y < -enemy.displayHeight * 4
-        || enemy.y > this.game.config.height + enemy.displayHeight
+        enemy.x < -enemy.displayWidth ||
+        enemy.x > this.game.config.width + enemy.displayWidth ||
+        enemy.y < -enemy.displayHeight * 4 ||
+        enemy.y > this.game.config.height + enemy.displayHeight
       ) {
         if (enemy) {
           if (enemy.onDestroy !== undefined) {
@@ -243,15 +241,15 @@ export default class SceneMain extends Phaser.Scene {
       }
     }
     // Destroy enemy lasers out of bound
-    for (let i = 0; i < this.enemyLasers.getChildren().length; i++) {
+    for (let i = 0; i < this.enemyLasers.getChildren().length; i += 1) {
       const laser = this.enemyLasers.getChildren()[i];
       laser.update();
 
       if (
-        laser.x < -laser.displayWidth
-        || laser.x > this.game.config.width + laser.displayWidth
-        || laser.y < -laser.displayHeight * 4
-        || laser.y > this.game.config.height + laser.displayHeight
+        laser.x < -laser.displayWidth ||
+        laser.x > this.game.config.width + laser.displayWidth ||
+        laser.y < -laser.displayHeight * 4 ||
+        laser.y > this.game.config.height + laser.displayHeight
       ) {
         if (laser) {
           laser.destroy();
@@ -265,10 +263,10 @@ export default class SceneMain extends Phaser.Scene {
       laser.update();
 
       if (
-        laser.x < -laser.displayWidth
-        || laser.x > this.game.config.width + laser.displayWidth
-        || laser.y < -laser.displayHeight * 4
-        || laser.y > this.game.config.height + laser.displayHeight
+        laser.x < -laser.displayWidth ||
+        laser.x > this.game.config.width + laser.displayWidth ||
+        laser.y < -laser.displayHeight * 4 ||
+        laser.y > this.game.config.height + laser.displayHeight
       ) {
         if (laser) {
           laser.destroy();
@@ -287,7 +285,7 @@ export default class SceneMain extends Phaser.Scene {
       this.y = Phaser.Math.Clamp(
         this.y,
         0,
-        this.scene.scene.game.config.height,
+        this.scene.scene.game.config.height
       );
     }
     return arr;

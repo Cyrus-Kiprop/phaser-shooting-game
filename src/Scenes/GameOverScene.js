@@ -6,7 +6,6 @@ import config from '../Config/config';
 import domApi from '../Entities/DomManipulation';
 
 const { hideUserInput } = domApi;
-const { resetScore, setScore } = api;
 
 export default class GameOverScene extends Phaser.Scene {
   constructor() {

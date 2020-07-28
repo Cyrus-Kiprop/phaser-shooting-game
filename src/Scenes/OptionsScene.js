@@ -2,7 +2,7 @@ import 'phaser';
 import Button from '../Objects/Button';
 import domApi from '../Entities/DomManipulation';
 
-const { showControls, hideUserInput } = domApi;
+const { hideUserInput } = domApi;
 
 export default class OptionsScene extends Phaser.Scene {
   constructor() {
@@ -42,7 +42,7 @@ export default class OptionsScene extends Phaser.Scene {
       'blueButton2',
       'Menu',
       'Title',
-      [hideUserInput],
+      [hideUserInput]
     );
   }
 
