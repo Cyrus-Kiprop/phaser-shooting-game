@@ -6,26 +6,26 @@ export default class Model {
   }
 
   set musicOn(value) {
-    this._musicOn = value;
+    this.musicOn = value;
   }
 
   get musicOn() {
-    return this._musicOn;
+    return this.musicOn;
   }
 
   set soundOn(value) {
-    this._soundOn = value;
+    this.soundOn = value;
   }
 
   get soundOn() {
-    return this._soundOn;
+    return this.soundOn;
   }
 
   set bgMusicPlaying(value) {
-    this._bgMusicPlaying = value;
+    this.bgMusicPlaying = value;
   }
 
   get bgMusicPlaying() {
-    return this._bgMusicPlaying;
+    return this.bgMusicPlaying;
   }
 }

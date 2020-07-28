@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import domApi from '../Entities/DomManipulation';
 
 const { hideUserInput } = domApi;

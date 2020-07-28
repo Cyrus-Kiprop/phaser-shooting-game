@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import domApi from '../Entities/DomManipulation';
 import api from '../Utils/ApiUtils';
 

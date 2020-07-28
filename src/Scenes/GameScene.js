@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import api from '../Utils/ApiUtils';
 import ParallaxBg from '../Entities/parallaxBg';
 import Player from '../Entities/Player';

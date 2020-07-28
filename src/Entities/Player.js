@@ -1,9 +1,9 @@
-import 'phaser';
+import Phaser from 'phaser';
 import Entity from './Entities';
 import PlayerLaser from './PlayerLaser';
 
 export default class Player extends Entity {
-  constructor(scene, x, y, key, type) {
+  constructor(scene, x, y) {
     super(scene, x, y, 'Player');
     this.setData('speed', 200);
     this.play('sprPlayer');

@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import config from '../Config/config';
 import domApi from '../Entities/DomManipulation';
 
@@ -20,7 +20,7 @@ export default class CreditsScene extends Phaser.Scene {
       config.width / 2,
       config.height / 2,
       config.width,
-      config.height
+      config.height,
     );
 
     Phaser.Display.Align.In.Center(this.creditsText, this.zone);
@@ -36,7 +36,7 @@ export default class CreditsScene extends Phaser.Scene {
       duration: 3000,
       delay: 1000,
       onComplete: () => {
-        this.destroy;
+        this.destroy();
       },
     });
 
@@ -47,8 +47,7 @@ export default class CreditsScene extends Phaser.Scene {
       duration: 8000,
       delay: 1000,
       onComplete: () => {
-        console.log(this.madeByTween.destroy);
-        this.madeByTween.destroy;
+        this.madeByTween.destroy();
         domApi.hideUserInput();
         this.scene.start('Title');
       },
