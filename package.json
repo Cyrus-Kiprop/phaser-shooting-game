@@ -21,7 +21,11 @@
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^5.0.9"
+    "webpack-merge": "^5.0.9",
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
+
   },
   "dependencies": {
     "phaser": "^3.24.1"
