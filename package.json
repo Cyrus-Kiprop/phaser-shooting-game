@@ -6,7 +6,7 @@
   "author": "<cyruskiprop254@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --config webpack/prod.js ",
+    "build": "webpack --config prod.js ",
     "start": "webpack-dev-server --config webpack/base.js --open",
     "test": "jest"
   },
