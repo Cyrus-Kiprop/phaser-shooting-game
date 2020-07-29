@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 export default {
   type: Phaser.AUTO,
-  parent: 'phaser-example',
+  parent: 'shooting-game',
   width: 800,
   height: 700,
   physics: {
@@ -11,4 +11,6 @@ export default {
       gravity: { x: 0, y: 0 },
     },
   },
+  pixelArt: true,
+  roundPixels: true,
 };
