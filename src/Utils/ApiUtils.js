@@ -1,3 +1,5 @@
+import 'regenerator-runtime';
+
 const baseUrl =
   'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
 
@@ -32,13 +34,13 @@ async function registerGame() {
 }
 
 async function setScore(username, scoreValue) {
-  const url = `${baseUrl}games/CMTUivGEZB8gyhrjwRwz/scores/`;
-  const scoreSet = {
-    user: username,
-    score: scoreValue,
-  };
-
   try {
+    const url = `${baseUrl}games/CMTUivGEZB8gyhrjwRwz/scores/`;
+    const scoreSet = {
+      user: username,
+      score: scoreValue,
+    };
+
     const response = await fetch(url, {
       method: 'POST',
       mode: 'cors',
@@ -61,11 +63,15 @@ function resetScore() {
 }
 
 async function getScore() {
-  const id = 'CMTUivGEZB8gyhrjwRwz';
-  const response = await fetch(`${baseUrl}games/${id}/scores/`);
-  const data = await response.json();
-  window.localStorage.setItem('listing', JSON.stringify(data.result));
-  return data;
+  try {
+    const id = 'CMTUivGEZB8gyhrjwRwz';
+    const response = await fetch(`${baseUrl}games/${id}/scores/`);
+    const data = await response.json();
+    window.localStorage.setItem('listing', JSON.stringify(data.result));
+    return data;
+  } catch (e) {
+    return e.message;
+  }
 }
 
 const api = {
