@@ -1,4 +1,5 @@
-const baseUrl = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
+const baseUrl =
+  'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
 
 const gameID = (data) => {
   const string = data.result;
@@ -64,6 +65,7 @@ async function getScore() {
   const response = await fetch(`${baseUrl}games/${id}/scores/`);
   const data = await response.json();
   window.localStorage.setItem('listing', JSON.stringify(data.result));
+  return data;
 }
 
 const api = {

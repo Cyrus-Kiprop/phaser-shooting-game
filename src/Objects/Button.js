@@ -23,7 +23,8 @@ export default class Button extends Phaser.GameObjects.Container {
           fn();
         });
       }
-      const task = targetScene !== '_' ? this.scene.scene.start(targetScene) : false;
+      const task =
+        targetScene !== '_' ? this.scene.scene.start(targetScene) : false;
       return task;
     });
 

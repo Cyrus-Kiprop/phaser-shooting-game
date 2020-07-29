@@ -46,7 +46,7 @@ export default class ScoreBoard extends Phaser.Scene {
       'blueButton2',
       'Main Menu',
       'Title',
-      [hideUserInput],
+      [hideUserInput]
     );
   }
 }
