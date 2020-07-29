@@ -1,20 +1,17 @@
 import api from '../src/Utils/ApiUtils';
-import 'regenerator-runtime/runtime.js';
+import 'regenerator-runtime/runtime';
 
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () =>
-      Promise.resolve({
-        result: 'Game with ID: Zl4d7IVkemOTTVg2fUdz added.',
-      }),
-  })
-);
+global.fetch = jest.fn(() => Promise.resolve({
+  json: () => Promise.resolve({
+    result: 'Game with ID: Zl4d7IVkemOTTVg2fUdz added.',
+  }),
+}));
 
 beforeEach(() => {
   fetch.mockClear();
 });
 
-const { registerGame, setScore, getScore, storeId, resetScore } = api;
+const { registerGame, setScore, getScore } = api;
 
 describe('RegisterGame', () => {
   const expected = 'Zl4d7IVkemOTTVg2fUdz';
@@ -32,14 +29,11 @@ describe('RegisterGame', () => {
 });
 
 describe('setScore', () => {
-  global.fetch = jest.fn(() =>
-    Promise.resolve({
-      json: () =>
-        Promise.resolve({
-          result: 'Leaderboard score created correctly.',
-        }),
-    })
-  );
+  global.fetch = jest.fn(() => Promise.resolve({
+    json: () => Promise.resolve({
+      result: 'Leaderboard score created correctly.',
+    }),
+  }));
 
   const expected = {
     result: 'Leaderboard score created correctly.',
@@ -73,27 +67,24 @@ describe('getScore', () => {
     ],
   };
 
-  global.fetch = jest.fn(() =>
-    Promise.resolve({
-      json: () =>
-        Promise.resolve({
-          result: [
-            {
-              user: 'John Doe',
-              score: 42,
-            },
-            {
-              user: 'Peter Parker',
-              score: 35,
-            },
-            {
-              user: 'Wonder Woman',
-              score: 50,
-            },
-          ],
-        }),
-    })
-  );
+  global.fetch = jest.fn(() => Promise.resolve({
+    json: () => Promise.resolve({
+      result: [
+        {
+          user: 'John Doe',
+          score: 42,
+        },
+        {
+          user: 'Peter Parker',
+          score: 35,
+        },
+        {
+          user: 'Wonder Woman',
+          score: 50,
+        },
+      ],
+    }),
+  }));
 
   let actual;
 

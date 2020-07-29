@@ -1,7 +1,6 @@
 import 'regenerator-runtime';
 
-const baseUrl =
-  'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
+const baseUrl = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
 
 const gameID = (data) => {
   const string = data.result;
