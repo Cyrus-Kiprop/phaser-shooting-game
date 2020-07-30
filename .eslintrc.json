@@ -14,7 +14,8 @@
     "no-param-reassign": "off",
     "eol-last": "off",
     "arrow-parens": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "import/no-unresolved": [2, { "caseSensitive": false }]
   },
   "ignorePatterns": ["dist/", "build/"]
 }
