@@ -15,7 +15,7 @@
     "eol-last": "off",
     "arrow-parens": "off",
     "no-underscore-dangle": "off",
-    "import/no-unresolved": [2, { "caseSensitive": false }]
+    "import/no-unresolved": "off"
   },
   "ignorePatterns": ["dist/", "build/"]
 }
