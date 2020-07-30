@@ -13,7 +13,7 @@
   <p align="center">
     A Shooter Game created in the fulfillment of Microverse mandatory Javascript capstone project.
     <br />
-    <a href="https://raw.githack.com/Cyrus-Kiprop/weather_app/gh-pages/index.html">View Demo</a>
+    <a href="https://gallant-wescoff-7173eb.netlify.app">View Demo</a>
     ·
     <a href="https://github.com/Cyrus-Kiprop/phaser-shooting-game/issues">Report Bug</a>
     ·
@@ -48,7 +48,7 @@ The app is built using native javascript api and Phaser (A game Library). The ma
 
 ## Live Demo
 
-Click [ here ](https://competent-meninsky-0f80cf.netlify.app/) for a live demo of the app.
+Click [ here ](https://gallant-wescoff-7173eb.netlify.app) for a live demo of the app.
 
 ## Game Developement Process
 
@@ -62,7 +62,6 @@ The app had a five day deadline. What follows is a breakdown of how I was able t
 
 Despite having a 5 day deadline, the time frame wasn't enough to implement all the objectives of the game, as scheduled before. Here are some of the missing functionalities:
 
-- Difficulty level
 - Game optimization for speed
 
 I was However, able to implement the core game functionalities.
@@ -79,9 +78,8 @@ I was However, able to implement the core game functionalities.
 
 ## Future Functionalities
 
-- Difficulty level increment
 - more animations.
-- Player healt status
+- Player health status
 
 ## Game Instruction
 
@@ -226,7 +224,7 @@ Distributed under the MIT License. See [ LICENSE ](https://github.com/Cyrus-Kipr
 <!-- MARKDOWN LINKS & IMAGES -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/Cyrus-Kiprop/phaser-shooter-game.svg?style=flat-square
-[contributors-url]: https://github.com/Cyrus-Kiprop/weather/graphs/contributors
+[contributors-url]: https://github.com/Cyrus-Kiprop/phaser-shooter-game/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/Cyrus-Kiprop/phaser-shooting-game.svg?style=flat-square
 [forks-url]: https://github.com/Cyrus-Kiprop/phaser-shooting-game/network/members
 [stars-shield]: https://img.shields.io/github/stars/Cyrus-Kiprop/phaser-shooting-game.svg?style=flat-square
