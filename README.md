@@ -42,9 +42,9 @@
 
 ## About The Project
 
-![](./images/demo.gif)weather_app
+Guardian of the Galaxy is a shooter game inspired by the guardian of the Galaxy movie. The game is browser based, and designed on the Phaser 3 game library. The game uses a collection of amazing art designed by various game designers from OpenGameArt website( Please Refer to the acknowlegment section for more Informations). The main goal of this game is to score the highest possible score, while killing invading alien ships.
 
-The app is built using native javascript api and Phaser (A game Library). The main aim of this app was to test the learner's ability to quickly adapt to new emerging technologies and in the long rand, be able to deliver the target project within the specified time constraint. This also ensure that the learner is able to adapt to the fast paced environment of the software development world.
+![](./images/demo.gif) Guardian of The Galaxies
 
 ## Live Demo
 
