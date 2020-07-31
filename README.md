@@ -105,12 +105,6 @@ Front-End(client)
 - Webpack/babel
 - [Font Awesome Icons](https://fontawesome.com/icons?d=gallery)
 
-```sh
-Testing Frameworks
-```
-
-- Jest
-
 <!-- GETTING STARTED -->
 
 ## Getting Started
@@ -171,6 +165,26 @@ http//localhost:8080
 ```
 
 ### Enjoy the shooting game
+
+```sh
+Testing Frameworks
+```
+
+- Jest
+
+```sh
+How to test
+```
+
+The game was tested using Jest framework. The test were necessary to ensure a robust system is achieved. The api utilized by the game to get and store player score, and the game logic (player/ animation ) were some of the core targets while testing.
+
+![](./images/test.gif) $ pass
+
+### If you like to get started on testing please run the following command
+
+```sh
+yarn test
+```
 
 <!-- ROADMAP -->
 
