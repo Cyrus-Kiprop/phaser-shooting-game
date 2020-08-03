@@ -14,20 +14,23 @@ export default class SceneMain extends Phaser.Scene {
   }
 
   create() {
-    this.leaderBoard = this.add
-      .text(
-        this.game.config.width * 0.9,
-        30,
-        `Score: ${this.sys.game.globals.score}`,
-        {
-          fontFamily: 'monospace',
-          fontSize: 18,
-          fontStyle: 'Bold',
-          color: 'green',
-          align: 'center',
-        },
-      )
-      .setOrigin(1);
+    this.leaderBoard = undefined;
+    this.liveScore = () => {
+      this.leaderBoard = this.add
+        .text(
+          this.game.config.width * 0.9,
+          30,
+          `Score: ${this.sys.game.globals.score}`,
+          {
+            fontFamily: 'monospace',
+            fontSize: 18,
+            fontStyle: 'Bold',
+            color: 'green',
+            align: 'center',
+          },
+        )
+        .setOrigin(1);
+    };
     const animationCreator = (key, frameValue, frameRate, repeat) => {
       this.anims.create({
         key,
@@ -204,6 +207,8 @@ export default class SceneMain extends Phaser.Scene {
         if (enemy) {
           if (enemy.onDestroy !== undefined) {
             this.sys.game.globals.score += 100;
+            if (this.leaderBoard !== undefined) this.leaderBoard.destroy();
+            this.liveScore();
             enemy.onDestroy();
           }
 
