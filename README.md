@@ -178,7 +178,7 @@ How to test
 
 The game was tested using Jest framework. The test were necessary to ensure a robust system is achieved. The api utilized by the game to get and store player score, and the game logic (player/ animation ) were some of the core targets while testing.
 
-![](./images/test.gif) $ pass
+![](./images/test.gif) \$ pass
 
 ### If you like to get started on testing please run the following command
 
