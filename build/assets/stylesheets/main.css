@@ -1,0 +1,70 @@
+body {
+  padding: auto;
+}
+
+.instructions {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  position: absolute;
+  width: 500px;
+  background-image: url('../ui/controls.jpg');
+  background-size: cover;
+  top: 276px;
+  left: 140px;
+  border: 2px solid #51dafd;
+  border-radius: 4px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#instructions > i {
+  margin-left: auto;
+  font-size: 16px;
+  z-index: 100;
+}
+
+.controls {
+  background-color: #f0f9fe;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2rem;
+  width: 200px;
+  margin-left: auto;
+}
+
+.controls > h2 {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.controls span {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.user-input > input {
+  position: absolute;
+  left: 278px;
+  top: 143px;
+  font-size: 35px;
+  border: 2px solid #51dafd;
+  border-radius: 5px;
+  background: transparent;
+  text-align: center;
+  color: #51dafd;
+  width: 250px;
+  z-index: 50;
+}
+
+input:hover {
+  outline: none;
+}
+
+input::placeholder {
+  color: inherit;
+  text-align: center;
+}

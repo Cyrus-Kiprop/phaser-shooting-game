@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./assets/stylesheets/main.css" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="shooter-game">
+      <div id="instructions" class="instructions hidden">
+        <i class="fa fa-window-close fa-2x closeButton" aria-hidden="true"></i>
+        <div class="controls">
+          <h2>Help: Controls</h2>
+          <span>W - Upward motion</span>
+          <span>A - Left motion</span>
+          <span>S - Down motion</span>
+          <span>D - Right motion</span>
+          <span>SPACE - Shoot</span>
+        </div>
+      </div>
+      <form id="user-input" class="user-input">
+        <input type="text" id="username" value="" placeholder="Enter Name" />
+      </form>
+    </div>
+    <script src="production.bundle.js"></script>
+    <script src="app.bundle.js"></script>
+  </body>
+</html>
